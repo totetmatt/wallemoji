@@ -30,7 +30,7 @@ object WebServer  {
 
 
     /* This prevent `publisherTweet` to stop when no more connection are active on `/twitter` */
-    /*Source.fromPublisher(publisherTweet).runWith(Sink.ignore)*/
+    Source.fromPublisher(publisherTweet).runWith(Sink.ignore)
     import akka.http.scaladsl.marshalling.sse.EventStreamMarshalling._
     val route =
       path("") {
