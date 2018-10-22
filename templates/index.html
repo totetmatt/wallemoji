@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <style>
+        .col {
+            text-align:center;
+        }
+        .cell {
+
+        font-size:3vw;
+        }
+    </style>
+    <meta charset="utf-8">
+    <title>Matrix Emoji</title>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div id="col_1" class="col">
+
+        </div>
+        <div id="col_2" class="col">
+
+        </div>
+        <div id="col_3" class="col">
+
+        </div>
+        <div id="col_4" class="col">
+
+        </div>
+        <div id="col_5" class="col">
+
+        </div>
+        <div id="col_6" class="col">
+
+        </div>
+        <div id="col_7" class="col">
+
+        </div>
+        <div id="col_8" class="col">
+
+        </div>
+        <div id="col_9" class="col">
+
+        </div>
+        <div id="col_10" class="col">
+
+        </div>
+        <div id="col_11" class="col">
+
+        </div>
+        <div id="col_12" class="col">
+
+        </div>
+        <div id="col_13" class="col">
+
+        </div>
+        <div id="col_14" class="col">
+
+        </div>
+        <div id="col_15" class="col">
+
+        </div>
+    </div>
+</div>
+</body>
+<script>
+function getRandomIntInclusive(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min +1)) + min;
+}
+
+    var source = new EventSource("/twitter");
+        source.addEventListener("emoji", function(e) {
+            //console.log(e)
+            var col = getRandomIntInclusive(1,15)
+
+            var div = document.createElement("div");
+            div.classList.add("cell");
+div.classList.add("animated");
+div.classList.add("fadeInDown");
+            div.innerHTML = e.data
+            document.getElementById("col_"+col).prepend(div);
+
+
+
+
+        })
+        source.onmessage = function(event) {
+             var data = JSON.parse(event.data)
+             console.log(data);
+        };
+</script>
+</html>
