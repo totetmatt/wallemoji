@@ -87,6 +87,10 @@ div.classList.add("fadeInDown");
             div.innerHTML = e.data
             document.getElementById("col_"+col).prepend(div);
 
+         if(document.getElementById("col_"+col).childNodes.length >= 15) {
+
+                    document.getElementById("col_"+col).childNodes.item(15).remove()
+                 }
 
 
 
