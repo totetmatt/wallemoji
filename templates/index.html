@@ -1,6 +1,13 @@
 <!doctype html>
 <html lang="en">
 <head>
+    <!--
+        Hello !
+        Thanks for enjoying the website.
+        What is it about ? Just a funny website that displays the emoji coming from the message of the twitter sample stream.
+
+        Any question or contact ? >> matthieu`dot`totet`arobase`gmail`dot`com or @totetmatt
+     -->
     <style>
         .col {
             text-align:center;
@@ -75,29 +82,26 @@ function getRandomIntInclusive(min, max) {
   return Math.floor(Math.random() * (max - min +1)) + min;
 }
 
-    var source = new EventSource("/twitter");
-        source.addEventListener("emoji", function(e) {
-            //console.log(e)
-            var col = getRandomIntInclusive(1,15)
+var source = new EventSource("/twitter");
+source.addEventListener("emoji", function(e) {
+    //console.log(e)
+    var col = getRandomIntInclusive(1,15)
 
-            var div = document.createElement("div");
-            div.classList.add("cell");
-div.classList.add("animated");
-div.classList.add("fadeInDown");
-            div.innerHTML = e.data
-            document.getElementById("col_"+col).prepend(div);
+    var div = document.createElement("div");
+    div.classList.add("cell");
+    div.classList.add("animated");
+    div.classList.add("fadeInDown");
+    div.innerHTML = e.data
+    document.getElementById("col_"+col).prepend(div);
 
-         if(document.getElementById("col_"+col).childNodes.length >= 15) {
+    if(document.getElementById("col_"+col).childNodes.length >= 15) {
+        document.getElementById("col_"+col).childNodes.item(15).remove()
+    }
+})
 
-                    document.getElementById("col_"+col).childNodes.item(15).remove()
-                 }
-
-
-
-        })
-        source.onmessage = function(event) {
-             var data = JSON.parse(event.data)
-             console.log(data);
-        };
+source.onmessage = function(event) {
+     var data = JSON.parse(event.data)
+     console.log(data);
+};
 </script>
 </html>
